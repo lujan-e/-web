@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog.middleware.auth.AuthMiddleware',  # Añadido
 ]
 
 ROOT_URLCONF = 'loginApp.urls'
@@ -77,13 +79,17 @@ WSGI_APPLICATION = 'loginApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'login_app',
-        'USER': 'sample_user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'postgres',  # Database name
+        'USER': 'postgres.msmifhdqspdnaqzwazop',  # User
+        'PASSWORD': 'Lu0995966ñññkkk{{3kk',  # Password
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',  # Host
+        'PORT': '6543',  # Port
+        'OPTIONS': {
+            'sslmode': 'require',  # Enforce SSL connection
+        },
     }
 }
+
 
 
 # Password validation
@@ -127,3 +133,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Omitido
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/blog'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+AUTH_USER_MODEL = 'accounts.CustomUser'
